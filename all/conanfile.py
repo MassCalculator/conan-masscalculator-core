@@ -1,18 +1,14 @@
-import os
 from conan import ConanFile
-from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
-from conan.tools.scm.git import Git
 
-
-class libmasscalculator_coreRecipe(ConanFile):
-    name = "libmasscalculator-core"
-    version = "1.0.0"
+class MassCalculatorCoreConan(ConanFile):
+    name = "masscalculator-core"
+    version = "0.1.0"
 
     # Optional metadata
     license = "MIT"
     author = "Mergim Halimi m.halimi123@gmail.com"
     url = "https://github.com/MassCalculator/conan-masscalculator-core"
-    description = "Core library for mass calculator"
+    description = "Core library for MassCalculator"
     topics = ("conan", "mass", "engineering")
 
     # Binary configuration
@@ -31,29 +27,18 @@ class libmasscalculator_coreRecipe(ConanFile):
     def configure(self):
         if self.options.shared:
             self.options.rm_safe("fPIC")
-
-    def layout(self):
-        cmake_layout(self)
-
-    def generate(self):
-        deps = CMakeDeps(self)
-        deps.generate()
-        tc = CMakeToolchain(self)
-        tc.generate()
-
-    def source(self):
-        git = Git(self)
-        git.clone(
-            "git@github.com:MassCalculator/libmasscalculator.git")
             
     def build(self):
-        cmake = CMake(self)
-        cmake.configure(build_script_folder="libmasscalculator")
-        cmake.build()
+      if self.settings.os == "Linux"  and self.settings.arch == "x86_64":
+
+        url= self.conan_data["binaries"][self.version][str(self.settings.os)]["url"]
+        sha256= self.conan_data["binaries"][self.version][str(self.settings.os)]["sha256"] 
+
+      else:
+        raise Exception("Binary does not exist for these settings")
 
     def package(self):
-        cmake = CMake(self)
-        cmake.install()
+      self.copy("*")
 
     def package_info(self):
-        self.cpp_info.libs = ["libmasscalculator-core"]
+        self.cpp_info.libs = ["masscalculator-core"]

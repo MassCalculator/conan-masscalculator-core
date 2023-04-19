@@ -1,0 +1,5 @@
+binaries:
+  0.1.0:
+    Linux:
+      sha256: "<SHA256>" 
+      url: "<URL>/masscalculator-core/0.1.0/gcc_64.tar.gz"
