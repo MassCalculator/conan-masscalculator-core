@@ -6,7 +6,7 @@ This is a Conan recipe for masscalculator-core. Below, you can find instructions
 
 ## Create the Conan package
 
-`conan create` builds a binary package for the recipe (conanfile.py). It uses the specified configuration (settings) in `.conan/profiles/default`. If you want to override the settings, please use the `-s` flag.
+`conan create` builds a binary package for the recipe (conanfile.py). It uses the specified configuration (settings) in `.conan/profiles/default`.
 
 ```bash
 conan create all/ --version 0.1.0 --user masscalculator --channel stable --build missing
