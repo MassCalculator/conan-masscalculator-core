@@ -1,5 +1,5 @@
 binaries:
   0.1.0:
     Linux:
-      sha256: "<SHA256>" 
-      url: "<URL>/masscalculator-core/0.1.0/gcc_64.tar.gz"
+      sha256: "0716066bd073ee59708b7d60b741b26b271512d287dc89e5e26bc11bd692fadf" 
+      url: "https://github.com/MassCalculator/masscalculator-core/releases/download/v0.1.0/masscalculator-core_v0.1.0.tar.gz"
