@@ -1,6 +1,9 @@
 # Conan Recipe for masscalculator-core
 
-This is a Conan recipe for masscalculator-core. Below, you can find instructions for building and uploading masscalculator-core to the Artifactory.
+[![Build Status](https://jenkins.mergimhalimi.com/buildStatus/icon?job=conan-masscalculator-core%2Fmaster)](https://jenkins.mergimhalimi.com/job/conan-masscalculator-core/job/master/)
+[![Build Status](https://github.com/MassCalculator/conan-masscalculator-core/workflows/CMake/badge.svg)](https://github.com/MassCalculator/conan-masscalculator-core/actions)
+
+This is a Conan recipe for `masscalculator-core`. Below, you can find instructions for building and uploading `masscalculator-core` to the Artifactory.
 
 > Note: The `conancenter` will be used as the Artifactory.
 
