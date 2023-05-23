@@ -1,0 +1,38 @@
+name: Conan Create
+
+on:
+  push:
+  pull_request:
+    types: [closed]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Environment setup
+      run: sudo tools/installers/essentials.sh
+
+    - name: Conan Profile Detect
+      run: conan profile detect
+
+    - name: Conan Create
+      run: conan create all/ --version 0.1.0 --user masscalculator --channel stable --build missing
+
+    - name: Conan Upload
+      run: echo 'Upload to conancenter is in progress'
+
+  trigger:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event.pull_request.merged == true
+
+    steps:
+      - name: Send repository dispatch event
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          repository: MassCalculator/masscalculator.github.io
+          event-type: conan-masscalculator-core-pr-merged
+          token: ${{secrets.MASSCALCULATOR_SECRET}}
