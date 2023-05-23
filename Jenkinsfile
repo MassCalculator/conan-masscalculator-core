@@ -11,14 +11,19 @@ pipeline {
                 sh "sudo tools/installers/essentials.sh"
             }
         }
-        stage('Create') {
+        stage('Conan Profile Detect') {
+            steps {
+                sh "sudo tools/installers/essentials.sh"
+            }
+        }
+        stage('Conan Create') {
             steps {
                 sh "conan create all/ --version 0.1.0 --user masscalculator --channel stable --build missing"
             }
         }
-        stage('Upload') {
+        stage('Conan Upload') {
             steps {
-                echo 'Upload stage is in progress'
+                echo 'Upload to conancenter is in progress'
             }
         }
     }
