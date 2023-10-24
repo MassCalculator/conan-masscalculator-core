@@ -12,7 +12,7 @@ This is a Conan recipe for `masscalculator-core`. Below, you can find instructio
 `conan create` builds a binary package for the recipe (conanfile.py). It uses the specified configuration (settings) in `.conan/profiles/default`.
 
 ```bash
-conan create all/ --version 0.1.0 --user masscalculator --channel stable --build missing
+conan create all/ --version 0.2.0 --user masscalculator --channel stable --build missing
 ```
 
 > Note: The command above uses the specified settings in .conan/profiles/default.
@@ -26,7 +26,7 @@ $ conan search masscalculator-core
 
 conancenter
   masscalculator-core
-    masscalculator-core/0.1.0
+    masscalculator-core/0.2.0
 ```
 
 ## Upload conan package to artifactory
@@ -34,7 +34,7 @@ conancenter
 `conan upload` uploads a recipe and binary packages to a remote.
 
 ```bash
-conan upload masscalculator-core/0.1.0@masscalculator/stable -r conancenter
+conan upload masscalculator-core/0.2.0@masscalculator/stable -r conancenter
 ```
 
 ## Requirements

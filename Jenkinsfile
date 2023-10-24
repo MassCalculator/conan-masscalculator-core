@@ -13,12 +13,12 @@ pipeline {
         }
         stage('Conan Profile Detect') {
             steps {
-                sh "sudo tools/installers/essentials.sh"
+                sh "conan profile detect"
             }
         }
         stage('Conan Create') {
             steps {
-                sh "conan create all/ --version 0.1.0 --user masscalculator --channel stable --build missing"
+                sh "conan create all/ --version 0.2.0 --user masscalculator --channel stable --build missing"
             }
         }
         stage('Conan Upload') {

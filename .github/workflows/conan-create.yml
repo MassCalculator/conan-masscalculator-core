@@ -19,7 +19,7 @@ jobs:
       run: conan profile detect
 
     - name: Conan Create
-      run: conan create all/ --version 0.1.0 --user masscalculator --channel stable --build missing
+      run: conan create all/ --version 0.2.0 --user masscalculator --channel stable --build missing
 
     - name: Conan Upload
       run: echo 'Upload to conancenter is in progress'

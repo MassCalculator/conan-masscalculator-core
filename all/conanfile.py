@@ -1,11 +1,10 @@
-import os
 from conan import ConanFile
-from conan.tools.files import get, copy
-
+from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout
+from conan.tools.scm import Git
 
 class MassCalculatorCoreConan(ConanFile):
     name = "masscalculator-core"
-    version = "0.1.0"
+    version = "0.2.0"
 
     license = "MIT"
     author = "Mergim Halimi m.halimi123@gmail.com"
@@ -26,37 +25,28 @@ class MassCalculatorCoreConan(ConanFile):
         if self.options.shared:
             self.options.remove("fPIC")
 
-    def build(self):
-        if self.settings.os == "Linux" and self.settings.arch == "x86_64":
-            url = self.conan_data["binaries"][self.version][str(
-                self.settings.os)]["url"]
-            sha256 = self.conan_data["binaries"][self.version][str(
-                self.settings.os)]["sha256"]
-            get(self, url)
+    def source(self):
+        git = Git(self)
+        git.clone(url="https://github.com/MassCalculator/masscalculator-core.git", target=".")
+        git.checkout("v0.2.0")
 
-        else:
-            raise Exception("Binary does not exist for these settings")
+    def layout(self):
+        cmake_layout(self)
+
+    def generate(self):
+        tc = CMakeToolchain(self)
+        tc.generate()
+
+    def build(self):
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.build()
 
     def package(self):
-        src_path = os.path.join("include")
-        copy(self, "*.h", src=src_path,
-             dst=os.path.join(self.package_folder, "include"), keep_path=True)
-        copy(self, "*.hh", src=src_path,
-             dst=os.path.join(self.package_folder, "include"), keep_path=True)
-        copy(self, "*.hpp", src=src_path,
-             dst=os.path.join(self.package_folder, "include"), keep_path=True)
-        copy(self, "*.so", src=os.path.join("linux-x86_64"),
-             dst=os.path.join(self.package_folder, "lib"), keep_path=False)
-        copy(self, "*.a", src=os.path.join("linux-x86_64"),
-             dst=os.path.join(self.package_folder, "lib"), keep_path=False)
-        copy(self, "*.cmake", src=os.path.join("cmake"),
-             dst=os.path.join(self.package_folder, "cmake"), keep_path=True)
+        cmake = CMake(self)
+        cmake.install()
 
     def package_info(self):
-        self.cpp_info.set_property("cmake_file_name", "masscalculator-core")
-        self.cpp_info.set_property("cmake_find_package", "masscalculator-core")
-        self.cpp_info.set_property(
-            "cmake_find_package_multi", "masscalculator-core")
         self.cpp_info.set_property(
             "cmake_target_name", "masscalculator::masscalculator-core")
 
