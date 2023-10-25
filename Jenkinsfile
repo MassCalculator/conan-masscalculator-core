@@ -13,7 +13,12 @@ pipeline {
         }
         stage('Conan Profile Detect') {
             steps {
-                sh "conan profile detect"
+                def profile_path = '/var/lib/jenkins/.conan2/profiles/default'
+                if (fileExists(profile_path)) {
+                    sh "Profile '/var/lib/jenkins/.conan2/profiles/default' already exists"
+                } else {
+                    sh "conan profile detect"
+                }
             }
         }
         stage('Conan Create') {
