@@ -16,7 +16,7 @@ pipeline {
                 script {
                     def profile_path = '/var/lib/jenkins/.conan2/profiles/default'
                     if (fileExists(profile_path)) {
-                        sh "Profile '/var/lib/jenkins/.conan2/profiles/default' already exists"
+                        echo "Profile $profile_path already exists"
                     } else {
                         sh "conan profile detect"
                     }
